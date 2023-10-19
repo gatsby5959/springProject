@@ -11,7 +11,7 @@
 		<java-version>11</java-version><!-- 수정 -->
 		<org.springframework-version>5.3.10</org.springframework-version><!-- 수정 -->
 		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.slf4j-version>2.0.7</org.slf4j-version> <!-- 1.7.30내렸다가  2.0.7로 다시 올림-->
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -61,20 +61,25 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic --><!-- 231017추가 -->
 		<dependency>
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-classic</artifactId>
-		    <version>1.2.3</version>
-		    <scope>test</scope>
+		    <version>1.4.5</version><!-- 1.2.3에서 올림  근데  내리면 또 전혀 안됨 --> 
+		    <scope>runtime</scope>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core --><!-- 231017추가 -->
 		<dependency>
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-core</artifactId>
-		    <version>1.2.3</version>
+		    <version>1.4.5</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 --><!-- 231017추가 -->
@@ -83,50 +88,6 @@
 		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 		    <version>1.16</version>
 		</dependency>
-
-		
-		
-		
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.slf4j</groupId> -->
-<!-- 			<artifactId>jcl-over-slf4j</artifactId> -->
-<!-- 			<version>${org.slf4j-version}</version> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.slf4j</groupId> -->
-<!-- 			<artifactId>slf4j-log4j12</artifactId> -->
-<!-- 			<version>${org.slf4j-version}</version> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>log4j</groupId> -->
-<!-- 			<artifactId>log4j</artifactId> -->
-<!-- 			<version>1.2.15</version> -->
-<!-- 			<exclusions> -->
-<!-- 				<exclusion> -->
-<!-- 					<groupId>javax.mail</groupId> -->
-<!-- 					<artifactId>mail</artifactId> -->
-<!-- 				</exclusion> -->
-<!-- 				<exclusion> -->
-<!-- 					<groupId>javax.jms</groupId> -->
-<!-- 					<artifactId>jms</artifactId> -->
-<!-- 				</exclusion> -->
-<!-- 				<exclusion> -->
-<!-- 					<groupId>com.sun.jdmk</groupId> -->
-<!-- 					<artifactId>jmxtools</artifactId> -->
-<!-- 				</exclusion> -->
-<!-- 				<exclusion> -->
-<!-- 					<groupId>com.sun.jmx</groupId> -->
-<!-- 					<artifactId>jmxri</artifactId> -->
-<!-- 				</exclusion> -->
-<!-- 			</exclusions> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 		</dependency> -->
-		
-
-		
-
 
 		<!-- @Inject -->
 		<dependency>
@@ -167,7 +128,7 @@
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
-		    <version>1.18.30</version>
+		    <version>1.18.20</version>
 		    <scope>provided</scope>
 		</dependency>
 		

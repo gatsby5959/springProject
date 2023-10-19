@@ -18,7 +18,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 
-@Configuration //난 컴피이 입니다 표시 (근데 웹 컨피그는 안붙임)
+@Configuration //난 컴피그 입니다 표시 (근데 웹 컨피그는 안붙임)
 @MapperScan(basePackages = {"com.myweb.www.repository"})   //어디서 스켄할까요? 여기서 스켄해가지고 올께요
 @ComponentScan(basePackages= {"com.myweb.www.service"})
 public class RootConfig {
@@ -34,7 +34,7 @@ public class RootConfig {
 		HikariConfig hikariConfig = new HikariConfig(); //히카리
 		//log4jdbc-log4j2의 드라이버 클래스 url 사용
 		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springtest");//DB랑 유저 등
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springdb");//DB랑 유저 등
 		hikariConfig.setUsername("springUser");
 		hikariConfig.setPassword("mysql");
 		
