@@ -62,47 +62,72 @@
 
 
 
-<a href="/board/modify?bno=${bvo.bno}"><button>수정</button></a> <br>
+<a href="/board/modify?bno=${bvo.bno}"><button class="btn btn-primary">글 수정</button></a> <br>
 
-<a href="/board/remove?bno=${bvo.bno}"><button>삭제</button></a> <br>
+<a href="/board/remove?bno=${bvo.bno}"><button   class="btn btn-danger">글 삭제</button></a> <br>
 
-<a href="/board/list/"><button>리스트</button></a>
-
+<a href="/board/list/"><button class="btn btn-secondary">글 리스트</button></a>
 <br>
 <br>
-
-<!-- 댓글 라인S -->
-<div>
-	<!-- 댓글 작성 라인 -->
-	<div>
-		<span id="cmtWriter">${ses.id }</span>
-		<input type="text" id="cmtText" placeholder="Add Comment...">
-		<button type="button" id = "cmtPostBtn">댓글등록</button>
+<!-- 231020댓글라인S -->
+<div class= "container" >
+	<!--댓글등록라인S -->
+	<div class="input-group mb-3">
+	  <span class="input-group-text" id="cmtWriter">Writer</span>
+	  <input type="text" class="form-control" placeholder="Test Comment Content" id = "cmtText">
+	  <button type="button" class="btn btn-success" id="cmtPostBtn">POST(댓글등록)</button>
 	</div>
+	<!--댓글등록라인E -->
 	
-	<!-- 댓글 표시 라인 -->
-	<div>
-		<ul id="cmtListArea">
-			<li>
-				<div>
-					<div>Writer</div>
-					Content
-				</div>
-				<span>reg_date</span>
-			</li>
-		</ul>
+	<!-- 댓글 표시 라인S -->
+	<ul class="list-group list-group-flush" id="cmtListArea">
+	  <li class="list-group-item">
+	  	<div class = "mb-3">
+	  		<div class= "fw-bold">Writer</div>
+	  		Content
+	  	</div>
+	  	<span class="badge rounded-pill text-bg-dark">modAt</span>
+	  </li>
+	  
+	</ul>
+	<!-- 댓글 표시 라인E -->
+	
+	<!-- 모달창S -->
+	<div class="modal" id="myModal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    
+	      <div class="modal-header">
+	        <h5 class="modal-title">Writer</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      
+	      <div class="modal-body">
+      		<div class="input-group mb-3">
+			<input type="text" class="form-control" placeholder="Test Comment Content" id = "cmtTextMod">
+	  		<button type="button" class="btn btn-success" id="cmtModBtn">POST</button>
+	      </div>
+	      
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
+	<!-- 모달창E -->
+	
+	
 </div>
-<!-- 댓글 라인E -->
+<!-- 231020댓글E -->
+
 
 <script type="text/javascript">
-const bnoVal = `<c:out value = "${bvo.bno}"/>`;
-const writerVal = `<c:out value = "${bvo.writer}"/>`;
-// const commentwriterVal = `<c:out value = "${cvo.writer}"/>`;
-const sesId = `<c:out value = "${ses.id}"/>`; //js로 보내버림
-console.log("bnoVal은 "+bnoVal+" /  sesId는 "+sesId);
+let bnoVal=`<c:out value="${bvo.bno}"/>`; //이래야 js에서 도 쓰고 여기서도 if문등으로 쓸수 있음 처음엔 $로 받음
+console.log(bnoVal);
 </script>
-<script type="text/javascript" src="/resources/js/boardComment.js"></script><!-- 해당위치에 넣어주기 -->
+
+<script type="text/javascript" src="/resources/js/boardComment.js">
+</script>
 <script>
 getCommentList(bnoVal);
 </script>

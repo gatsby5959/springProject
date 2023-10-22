@@ -12,6 +12,12 @@
 h1,p,h3{
 margin:20
 }
+
+.pagination .page-item {
+    display: flex;
+    align-items: center;
+}
+
 </style>
 </head>
 <body>

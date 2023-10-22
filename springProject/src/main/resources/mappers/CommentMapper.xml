@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<!-- | cno     | bigint       | NO   | PRI | NULL              | auto_increment    | -->
+<!-- | bno     | bigint       | YES  |     | NULL              |                   | -->
+<!-- | writer  | varchar(100) | NO   |     | NULL              |                   | -->
+<!-- | content | text         | NO   |     | NULL              |                   | -->
+<!-- | reg_at  | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED | -->
+<!-- | mod_at  | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED | -->
+  
+  
+  <mapper namespace="com.myweb.www.repository.CommentDAO">
+     
+     <insert id="insert" parameterType="com.myweb.www.domain.CommentVO">
+		insert into comment (bno, writer, content) values (#{bno},#{writer},#{content})
+     </insert>
+ 
+ 
+ 	<select id= "getList" resultType="com.myweb.www.domain.CommentVO">
+  		select * from comment where bno = #{bno} order by cno desc
+ 	</select>
+ 	
+ 	<delete id="delete" parameterType="int">
+		DELETE FROM comment WHERE cno = #{cno}
+	</delete>
+ 	
+ 
+  </mapper>
