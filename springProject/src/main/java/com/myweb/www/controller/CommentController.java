@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myweb.www.domain.CommentVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,12 +58,18 @@ public class CommentController {
 	
 	
 	
-	@GetMapping(value="/{bno}", produces = MediaType.APPLICATION_JSON_VALUE) //조회하면 겟
-	public ResponseEntity<List<CommentVO>> spread(@PathVariable("bno") int bno){
-		log.info(">>> comment List bno >>" + bno);
+	@GetMapping(value="/{bno}/{page}", produces = MediaType.APPLICATION_JSON_VALUE) //조회하면 겟
+	public ResponseEntity<PagingHandler> spread(@PathVariable("bno") int bno,
+			@PathVariable("page")int page){
+		log.info(">>> comment List의 bno >>" + bno);
+		
+		log.info(">>> comment List의 page >>" + page);
+		
+		PagingVO pgvo = new PagingVO(page, 5);
 		//DB요청
-		List<CommentVO> list = csv.getList(bno);
-		return new ResponseEntity<List<CommentVO>>(list, HttpStatus.OK); //아닐떄는 JS로 안보냄  되면 JS로 다시 보냄
+//		List<CommentVO> list = csv.getList(bno);
+		return new ResponseEntity<PagingHandler>(
+				csv.getList(bno, pgvo), HttpStatus.OK); //아닐떄는 JS로 안보냄  되면 JS로 다시 보냄
 	}
 	
 	
@@ -87,6 +96,26 @@ public class CommentController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	@PutMapping(value="/{cno}" , consumes = "application/json" , 
+								produces = MediaType.TEXT_PLAIN_VALUE)//포스트는 이것저것 많아서 이건 밸류 입니다 라고 고정해야함 (딴 컨트롤러의 딴건 그냥 생략한것뿐)
+	public ResponseEntity<String> edit(@PathVariable("cno")long cno,
+								@RequestBody CommentVO cvo){
+		//파라미터 값이 리퀘스트 안에 있음 그래서 위 에것 씀
+		log.info("여긴 코맨트컨트롤러에요 댓글 수정 시작함~");
+		log.info(">>>>>cvo >>> "+cno);
+		//DB연결
+		int isOk = csv.modify(cvo);
+//		int isOk = 1;
+		//리턴스 response의 통신 상태를 같이 리턴
+		return isOk > 0 ? //삼항연산자  스트링 보내려고 함
+				new ResponseEntity<String>("1",HttpStatus.OK) //서버가 정상이라 스트링 3 보냄 다시 js보내는 부분
+					: new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR); //서버내부에서 에러가 나서 0보냄
+	}
 	
 	
 	

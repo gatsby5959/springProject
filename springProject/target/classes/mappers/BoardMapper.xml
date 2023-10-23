@@ -18,6 +18,7 @@
 		<include refid="search"></include>
 		order by bno desc limit #{pageStart}, #{qty}
 	</select>
+
 	
 	
 	<select id = "getDetail"  parameterType="int"
@@ -26,7 +27,7 @@
 	</select>
 	
 	<update id = "update" parameterType = "com.myweb.www.domain.BoardVO">
-		update board set title = #{title}, content=#{content}
+		update board set title = #{title}, content=#{content}, mod_at = now()
 		 where bno= #{bno};
 	</update>
 	

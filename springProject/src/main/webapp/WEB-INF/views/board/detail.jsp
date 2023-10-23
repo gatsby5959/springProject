@@ -92,6 +92,16 @@
 	</ul>
 	<!-- 댓글 표시 라인E -->
 	
+	<!-- 댓글 페이징 라인S -->
+	<div>
+		<div>
+			<button type="button" id="moreBtn" data-page="1"
+			class="btn btn-outline-dark" style="visibility:hidden">MORE+</button>
+		</div>
+	</div>
+	<!-- 댓글 페이징 라인E -->
+	
+	
 	<!-- 모달창S -->
 	<div class="modal" id="myModal" tabindex="-1">
 	  <div class="modal-dialog">
@@ -104,12 +114,12 @@
 	      
 	      <div class="modal-body">
       		<div class="input-group mb-3">
-			<input type="text" class="form-control" placeholder="Test Comment Content" id = "cmtTextMod">
+			<input type="text" class="form-control" placeholder="Te1st Comment Content" id = "cmtTextMod">
 	  		<button type="button" class="btn btn-success" id="cmtModBtn">POST</button>
 	      </div>
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary btn_close" data-bs-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>
