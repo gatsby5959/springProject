@@ -25,6 +25,7 @@ import com.myweb.www.domain.PagingVo;
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BoardService;
+import com.myweb.www.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +40,9 @@ public class BoardController {
 	private BoardService bsv;
 
 	private FileHandler fh;
+	
+	private CommentService csv;
+	
 	@Autowired
 	public BoardController(BoardService bsv,FileHandler fh) {
 		this.bsv = bsv;
@@ -107,6 +111,10 @@ public class BoardController {
 	public String list(Model model, PagingVo pagingVO) {
 		log.info(">>>>>>pagingVO >>" + pagingVO);
 
+		//댓글 수 구하기는 글
+		
+		
+		
 		// 이렇게 하면 service에서 return값 설정해주면 됨
 		model.addAttribute("list", bsv.getList(pagingVO));
 
@@ -162,22 +170,19 @@ public class BoardController {
 	@PostMapping("/modify")
 	public String modify(BoardVO bvo, RedirectAttributes reAttr,
 			@RequestParam(name="files", required=false)MultipartFile[] files) {
-//		int isOk = bsv.modify(bvo);
+
+		//		int isOk = bsv.modify(bvo);
 //		
 //		red.addAttribute("bno", bvo.getBno()); //Flash삭제 1번쓰고 사라지는 값같은게 Flash라 그냥 없애버림 (뭔가안되서..) //전경환 수정231025_00:40
 ////		//위와 같이 하면 return "redirect:/board/detail?bno="+bvo.getBno(); 하는 거와 같음
 //		red.addFlashAttribute("isOk", isOk);
 //		return "redirect:/board/detail";
 		
-		
-		
 		log.info("모디파이가 포스트를 탐");
 		log.info(">>>> modify bvo >> " + bvo);
 		
-		
-		
 		List<FileVO> flist = null;
-		if(files[0].getSize()>0) {
+		if(files[0].getSize() > 0) {
 			//기존 파일은 이미 DB에 등록완료 삭제할 파일은 비동기로 이미 삭제 완료
 			//새로 추가할 파일만 추가 
 			//file이 존재함
@@ -188,6 +193,7 @@ public class BoardController {
 		BoardDTO bdto = new BoardDTO(bvo,flist);
 		log.info("bdto = {}", bdto);
 		int isOk = bsv.modifyFile(bdto);
+
 //		int isOk = bsv.modify(bvo);
 		
 //		log.info(">>>> board modify >> "+ (isOk>0? "OK" : "FAIL"));
@@ -202,6 +208,7 @@ public class BoardController {
 	// 삭제
 	@GetMapping("/remove")
 	public String remove(@RequestParam("bno") long bno, RedirectAttributes red) {
+		log.info("컨트롤러 /remove진입");
 		int reisOk = bsv.remove(bno);
 		red.addFlashAttribute("reisOk", reisOk);
 		return "redirect:/board/list";
@@ -209,10 +216,10 @@ public class BoardController {
 	
 	@DeleteMapping(value="/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid ){
-		
 		log.info(">>> uuid >>" + uuid);
-		int isOk = 0;
+		int isOk = -99;
 			isOk = bsv.removefile(uuid);
+			log.info("isOk는 "+ isOk);
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK): 
 			new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);  //아니면 스트링값을 0 주고 서버에러값 넣어줌
 	

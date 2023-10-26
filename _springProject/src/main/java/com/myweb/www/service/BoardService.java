@@ -15,7 +15,7 @@ public interface BoardService {
 
 	BoardVO detail(long bno);
 
-	int modify(BoardVO bvo);
+//	int modify(BoardVO bvo);
 
 	BoardVO SelectOneForModify(long bno);
 

@@ -11,13 +11,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @MapperScan(basePackages = { "com.myweb.www.repository" })
-@ComponentScan(basePackages = { "com.myweb.www.service" })
+@ComponentScan(basePackages = {"com.myweb.www.service","com.myweb.www.handler"}) //
+@EnableAspectJAutoProxy  //231026트랜젝션을 위해 담
+@EnableTransactionManagement  //231026트랜젝션을 위해 담
+@EnableScheduling   //231026트랜젝션을 위해 담
 public class RootConfig {
 	// 매퍼, db라인에 대한 설정
 
@@ -69,4 +76,11 @@ public class RootConfig {
 		
 		return (SqlSessionFactory)sqlFactoryBean.getObject();
 	}
+	
+	//트렌젝션메니저 빈 설정23 10 26 //231026트랜젝션을 위해 담
+	@Bean
+	public DataSourceTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(dataSource());
+	}
+	
 }

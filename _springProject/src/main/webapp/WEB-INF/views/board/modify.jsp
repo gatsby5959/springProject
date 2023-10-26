@@ -34,7 +34,17 @@
 				</td>
 		</table>
 		
-		
+		<!-- 새파일 등록 S-->
+		<div class="mb-3">
+			<!-- multiple="multiple" => 파일을 여러 개 등록하기 위해 -->
+		  <input type="file" class="form-control"  name="files" id="files" style="display: none;" multiple="multiple"> <!-- name이 컨트롤러의 @RequestParam의 name임  -->
+			<!-- input button trigger  용도의 button -->
+		<button type="button" id="trigger" class="btn btn-outline-primary">File Upload</button>
+		</div>
+		<div class="mb-3" id="fileZone">
+			<!-- 첨부파일 표시될 영역 -->
+		</div>
+		<!-- 새파일 등록 E-->
 		
 		
 				<!-- 파일 표시란 ---------------------------------------------------------------S-->
@@ -43,11 +53,11 @@
 			<li class="list-group-item d-flex justify-content-between align-items-start">  <!--class="list-groupitem d-flex justify   -->
 			<c:choose>
 				<c:when test="${fvo.fileType > 0}">
-					<div>
-						<img src="/upload/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_th_${fvo.fileName}"> <!-- 원본파일명 규칙 th해봄 -->
-						<button type="button" class="file-x" data-uuid="${fvo.uuid}">X</button><!-- 비동기로 할꺼 -->
-    					${fvo.uuid}	
-					</div>
+<!-- 					<div> -->
+<%-- 						<img src="/upload/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_th_${fvo.fileName}"> <!-- 원본파일명 규칙 th해봄 --> --%>
+<%-- 						<button type="button" class="file-x" data-uuid="${fvo.uuid }">X</button><!-- 비동기로 할꺼 --> --%>
+<%--     					${fvo.uuid } --%>
+<!-- 					</div> -->
 				
 					
 				</c:when>
@@ -57,7 +67,9 @@
 			</c:choose>
 			<div class="ms-2 me-auto">
 				<div class="fw-bold">${fvo.fileName }</div>
+				<img src="/upload/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_th_${fvo.fileName}">
 				<span class="badge bg-secondary rounded-pull">${fvo.fileSize}Byte</span>
+				<button type="button" data-uuid="${fvo.uuid}" class="btn btn-sm btn-danger py-0 file-x">X</button>
 			</div>
 			
 <!-- 			<dir> -->
@@ -74,7 +86,7 @@
 		
 		
 		
-		<button class="btn btn-primary" type="submit">수정 완료</button>
+		<button class="btn btn-primary" type="submit" id="regBtn">수정 완료</button>
 		<a	href="/board/list"><button class="btn btn-primary" type="button">리스트로</button></a>
 	
 	
@@ -84,11 +96,11 @@
 	
 		<!-- 파일등록라인2---------S -->
 
-	file: <input type="file" id="files" name="files" multiple="multiple" style="display:none"><!-- multiple은 여러개 올릴수도 있게 하는 옵션 -->
-	<button type="button" id="trigger">FileUpload</button><br>
-	<div id="fileZone">
-	</div>
-	<button type="submit" id="regBtn">등록</button>
+<!-- 	file: <input type="file" id="files" name="files" multiple="multiple" style="display:none">multiple은 여러개 올릴수도 있게 하는 옵션 -->
+<!-- 	<button type="button" id="trigger">FileUpload</button><br> -->
+<!-- 	<div id="fileZone"> -->
+<!-- 	</div> -->
+<!-- 	<button type="submit" id="regBtn">등록</button> -->
 
 	<!-- 파일등록라인2---------S -->
 	
@@ -101,7 +113,7 @@
 	
 	
 	
-	<script type="text/javascript" src="/resources/js/boardModify.js"></script>
+	<script type="text/javascript" src="/resources/js/boardModify.js"></script> <!-- 모디파이js동작?하라고 끼워줌 -->
 	<script type="text/javascript" src="/resources/js/boardRegister.js"></script>
 	<jsp:include page="../common/footer.jsp" />
 </body>

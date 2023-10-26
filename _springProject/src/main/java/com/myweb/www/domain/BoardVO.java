@@ -19,6 +19,6 @@ public class BoardVO {
 	private String regAt; //db에서는 reg_at
 	private String modAt;
 	private int readCount;
-	private int commentCount; //231013추가
-	private int fileCount; //231013추가
+	private int cmtQty; //231013추가
+	private int hasFile; //231013추가
 }

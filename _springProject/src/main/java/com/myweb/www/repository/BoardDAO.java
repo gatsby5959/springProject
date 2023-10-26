@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.PagingVo;
 
@@ -28,6 +29,15 @@ public interface BoardDAO {
 	int getTotalCount(PagingVo pagingVO);
 
 	long selectOneBno();
+
+	int updateCommentCount();
+	int updateFileCount();
+	
+	int deleteCommentAll(long bno);
+
+	void minusReadCount(long bno);
+
+	
 
 //	int removefile(String uuid);
 }

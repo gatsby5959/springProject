@@ -79,8 +79,8 @@ justify-content: center;
 						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.writer }</a></td>
 						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.title }</a></td>
 						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.readCount }</a></td>
-						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.commentCount }</a></td>
-						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.fileCount }</a></td>
+						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.cmtQty }</a></td>
+						<td><a href="/board/detail?bno=${bvo.bno}">${bvo.hasFile }</a></td>
 
 					</tr>
 				</c:forEach>
