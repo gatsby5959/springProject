@@ -31,7 +31,7 @@ public class FileSweeper {
 	private FileDAO fdao;
 	
 	//                초 분 시 일 월 요일 년도(생략 가능)      //크론 표현식 검색해볼것...
-	@Scheduled(cron = "0 47 21 * * *")   //ex ) 일주일에 한번 한달에 한번
+	@Scheduled(cron = "0 0 21 * * *")   //ex ) 일주일에 한번 한달에 한번
 	public void fileSweeper() throws Exception {
 		log.info(">>> FileSweeper Running Start : {} "+LocalDateTime.now());
 		

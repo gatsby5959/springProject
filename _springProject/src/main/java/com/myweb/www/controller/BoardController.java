@@ -123,6 +123,7 @@ public class BoardController {
 		int totalCount = bsv.getTotalCount(pagingVO);
 		PagingHandler ph = new PagingHandler(pagingVO, totalCount);
 		model.addAttribute("ph", ph);
+		log.info("겟메핑 /list 탐");
 		return "/board/list";
 	}
 

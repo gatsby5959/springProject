@@ -27,11 +27,22 @@ width: 100%;
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" href="/board/list">Board List</a>
+          <a class="nav-link" href="/member/register">memberSignUp회원가입</a> 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/board/register">Board Reg</a> <!-- href="/board/register"는 BoardController로 들어가는 매핑 -->
+          <a class="nav-link" href="/member/login">memberLogIn</a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/member/logout">memberLogOut</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/board/list"> BoardList!!</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/board/register">BoardReg!!!</a> <!-- href="/board/register"는 BoardController로 들어가는 매핑 -->
         </li>
       </ul>
     </div>

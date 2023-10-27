@@ -13,7 +13,7 @@ public interface BoardService {
 
 	List<BoardVO> getList();
 
-	BoardVO detail(long bno);
+//	BoardVO detail(long bno);
 
 //	int modify(BoardVO bvo);
 

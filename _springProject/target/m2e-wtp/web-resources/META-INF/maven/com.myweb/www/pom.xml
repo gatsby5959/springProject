@@ -188,7 +188,7 @@
 		
 		
 	
-		<!-- ■ security관련 -->
+		<!-- ■ security관련 s-->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -207,6 +207,14 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>5.5.3</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>5.5.3</version>
+		</dependency><!-- 프린시펄 아이디 보려고 씀 -->
+		<!-- ■ security관련 e-->
+		
 
 		<!-- ■ utill관련(json, fileUpload, thumbnailator, tika 등) -->
 		<dependency>

@@ -120,18 +120,19 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	
-	@Override
-	public BoardVO detail(long bno) {
-//		bdao.readCount(bno); //detail2에서 카운트 해줘서 여기서는 빼자
-		return bdao.selectOne(bno);
-	}
+//	@Override
+//	public BoardVO detail(long bno) {
+////		bdao.readCount(bno); //detail2에서 카운트 해줘서 여기서는 빼자
+//		return bdao.selectOne(bno);
+//	}
 	
 	@Transactional
 	@Override
 	public BoardDTO detail2(long bno) {
 		bdao.readCount(bno);
 		BoardDTO bdto = new BoardDTO();
-		bdto.setBvo(detail(bno));	//bdao bvo호출 select * from board where bno=#{bno}
+		bdto.setBvo(bdao.selectOne(bno));	//bdao bvo호출 select * from board where bno=#{bno}
+		
 		bdto.setFlist(fdao.getFileList(bno));	//bdao bvo호출
 
 //      DTO클래스는 아래와 같음
