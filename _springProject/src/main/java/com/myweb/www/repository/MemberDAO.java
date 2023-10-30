@@ -2,6 +2,7 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
 
@@ -16,5 +17,9 @@ public interface MemberDAO {
 	List<AuthVO> selectAuths(String username);
 
 	int updateLastLogin(String authEmail);
+
+	List<MemberVO> selectAll();
+
+	MemberVO selectOne(String email);
 
 }

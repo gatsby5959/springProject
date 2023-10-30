@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+일단 멤버 디테일 jsp진입
+
+<script>
+console.log("mvo는 " + "${mvo}");
+</script>
 
 </body>
 </html>

@@ -96,7 +96,6 @@ document.getElementById('logoutLink').addEventListener('click',(e)=>{
 	e.preventDefault();
 	document.getElementId('logoutForm').submit(); 
 	})
-}
 </script>
 
 </body>
