@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix = "sec" uri="http://www.springframework.org/security/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,15 +76,24 @@
 		<a	href="/board/list"><button class="btn btn-primary" type="button">리스트로</button></a>
 
 		<hr>
+		
+
+		
 		<!-- 댓글 라인 -->
-		<div>
+		<div class="container">
 			<!-- 댓글 등록 라인 -->
+			<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.mvo.email" var = "authEmail"/>
 			<div class="input-group mb-3">
-				<span class="input-group-text" id="cmtWriter">${bvo.writer}</span> <input
+				<span class="input-group-text" id="cmtWriter">${authEmail}</span> 
+				<input
 					type="text" class="form-control" id="cmtText"
 					placeholder="Test Comment">
-				<button class="btn btn-primary" id="cmtPostBtn" type="button">댓글
-					등록</button>
+				
+				<button class="btn btn-primary" id="cmtPostBtn" type="button">댓글등록</button>
+			</sec:authorize>
+
+				
 			</div>
 
 

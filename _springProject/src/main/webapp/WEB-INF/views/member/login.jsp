@@ -29,6 +29,22 @@
 		  <label for="p" class="form-label">pwd</label>
 		  <input type="password" class="form-control"  name="pwd" id="p">
 		</div>
+<%-- 		${param.errMsg} --%>
+		<c:if test="${not empty param.errMsg }">
+			<div class="text-danger mb-3">
+				
+				<c:choose>
+					<c:when test="${param.errMsg eq 'Bad credentials'}">  <!-- BadCredentialsException 관련 231030-->
+						<c:set var="errText" value="이메일 & 비밀번호가 일치하지 않습니다."/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="errText" value="관리자에게 문의해주세요. "/>
+					</c:otherwise>
+				</c:choose>
+				${errText}
+			</div>
+		</c:if>
+		
 		<button class="w-100 btn btn-primary btn-lg my-5" type="submit">login로그인</button>
 	</form>
 </div>

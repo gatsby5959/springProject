@@ -23,4 +23,10 @@ public class MemberServiceImpl implements MemberService {
 		int isOk = mdao.insertMember(mvo); //bno 등록
 		return mdao.insertAuthInit(mvo.getEmail());
 	}
+
+	@Override
+	public boolean updateLastLogin(String authEmail) {
+		// TODO Auto-generated method stub
+		return mdao.updateLastLogin(authEmail) > 0 ? true : false;
+	}
 }

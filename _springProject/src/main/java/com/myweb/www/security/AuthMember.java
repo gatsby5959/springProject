@@ -22,7 +22,9 @@ public class AuthMember extends User { //생성자? 가져올떄 2번때 좀 짧
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AuthMember(MemberVO mvo) {
+	
+	//231030
+	public AuthMember(MemberVO mvo) { //여기서 아이디 암호를 다 일단 완성함
 		super( mvo.getEmail(), mvo.getPwd(),
 				mvo.getAuthVOList()
 				.stream()

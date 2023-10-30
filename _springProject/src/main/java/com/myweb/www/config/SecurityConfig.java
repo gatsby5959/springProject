@@ -67,9 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/member/list").hasRole("ADMIN")
 		.antMatchers("/","/board/list","/board/detail","/resources/**","/upload/**","/comment/**","/member/register","/member/login").permitAll()
-		.anyRequest().authenticated(); //나머지 리퀘스트는 인증된 사용자만 사용할수 있게           //비회원도 되는것이 PermitAll()
+		.anyRequest().authenticated(); //나머지 리퀘스트는 인증된 사용자만 사용할수 있게           //비회원도 되는것이 PermitAll()   //나중에 comment/**할때는 퍼미션으로 가면 됨 post modify등
 		// '맴버의 리스트'는 ADMIN만 보이게...
 		
+		
+		//유저네임을 이메일로 할께~
 		//커스텀 로그인 페이지를 구성   (로그인은 어떻게 할건지 설정)
 		// Controller의  주소요청 맵핑도 같이 꼭 적어줘야함(.loginPage("/member/login"))
 		http.formLogin()
@@ -79,12 +81,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.successHandler(authSuccessHandler())
 		.failureHandler(authFailureHandler());
 		
-		//로그아웃 페이지  (로그아웃은 어떻게 할건지 설정)
+		//로그아웃 페이지(로그아웃은 어떻게 할건지 설정)       반드시 method="post"
 		http.logout()
-		.logoutUrl("/member/logout")
-		.invalidateHttpSession(true)
-		.deleteCookies("JSESSIONID")
-		.logoutSuccessUrl("/");
+			.logoutUrl("/member/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID")
+			.logoutSuccessUrl("/");
 		
 	}
 	

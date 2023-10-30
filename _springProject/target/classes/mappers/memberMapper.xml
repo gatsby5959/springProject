@@ -14,4 +14,17 @@
 insert into auth_member values(#{email},'ROLE_USER')
 </insert>
 
+<select id="selectEmail" resultType="com.myweb.www.security.MemberVO"> <!--시큐리티컨피그에서 유저내임이 이메일임  -->
+	select * from member where  email =#{email}
+</select>
+
+<select id="selectAuths" resultType="com.myweb.www.security.AuthVO" > <!--시큐리티컨피그에서 유저내임이 이메일임  -->
+	select * from auth_member where email =#{email}
+</select>
+
+<update id="updateLastLogin">
+	update member set last_login = now() where email= #{email}
+</update>
+
+
 </mapper>
