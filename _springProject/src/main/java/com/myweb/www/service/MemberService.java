@@ -14,6 +14,13 @@ public interface MemberService {
 	List<MemberVO> getList();
 
 	AuthMember detail(String email);
+	
+	int modify(MemberVO mvo);
+	
+	int modifyPwdEmpty(MemberVO mvo);
+	
+	int remove(String email);
 
+	MemberVO detail2(String email);
 	
 }

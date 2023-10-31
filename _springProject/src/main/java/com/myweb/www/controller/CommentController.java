@@ -60,6 +60,7 @@ public class CommentController {
 	// 댓글 삭제
 	@DeleteMapping(value = "/remove/{cno}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> remove(@PathVariable("cno") long cno) {
+		
 		int isOk = csv.remove(cno);
 
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)

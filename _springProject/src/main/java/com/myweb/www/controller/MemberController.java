@@ -2,8 +2,12 @@ package com.myweb.www.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member/**")
 @Controller
 public class MemberController {
-
+    
 	@Inject
 	private BCryptPasswordEncoder bcEncoder;
 	
@@ -92,15 +96,67 @@ public class MemberController {
 //	}
 	
 
-	@GetMapping({"/detail","modify"})
+	@GetMapping({"/detail"})
 	public void detail(Model model, @RequestParam("email")String email) {
 
-		AuthMember amdto = msv.detail(email);
-		//bno를 받아서 dto로 바꾸고 보낸다. ------> email을 받아서 amdto로 바꾸고 보낸다?로 바뀔듯해서 진행중...
+		MemberVO mvo = msv.detail2(email);
+		log.info("mvo는 "+ mvo);
+		model.addAttribute("mvo",mvo);	//이러면void니 detail.jsp로 모델에 쌓아서 날아가는듯 
+	}
+	
 
-		log.info("amdto.getMvo()는>> "+ amdto.getMvo());
-		model.addAttribute("mvo", amdto.getMvo()); 
-//		model.addAttribute("amdto", amdto); //이러면void니 detail.jsp로 모델에 쌓아서 날아가는듯 
+	
+
+	@GetMapping("/modify")
+	public void modify(@RequestParam("email") String email, Model m) {
+		log.info(">>>> 겟메핑 modify>>> email >>> " + email);
+		log.info(">>>> modify>>> email >>> " + email);
+		m.addAttribute("mvo", msv.detail2(email));
+		log.info("m "+m);
+		log.info("모디파이 겟메핑 끝");
+	}
+	
+	@PostMapping({"/modify"})
+	public void modify(MemberVO mvo, Model m , HttpServletRequest req, HttpServletResponse res) {
+		log.info(">>>> 포스트 메핑 modify>>> mvo >>> " + mvo);
+		log.info("2222222222222222222222");
+		int isOk = 3;
+//		log.info("mvo.getPwd().isEmpty()의 값 "+mvo.getPwd().isEmpty());
+		if(mvo.getPwd()==null||mvo.getPwd().isEmpty()) {
+			log.info("if(mvo.getPwd().isEmpty())"+"진입");
+			isOk = msv.modifyPwdEmpty(mvo);
+		}else {
+			log.info("mvo.getPwd().isEmpty()의 else{}"+"진입");
+			mvo.setPwd(bcEncoder.encode(mvo.getPwd()));
+			isOk = msv.modify(mvo);
+		}
+		log.info("if문 지난 위치");
+		logout(req,res);
+		
+		m.addAttribute("isOk",isOk);
+		log.info(">>>> 포스트 메핑 modify 끝");	
+	}
+	
+	
+	
+	
+	@GetMapping("/remove")
+	public String removeMember(@RequestParam("email") String email, Model m,
+			HttpServletRequest req, HttpServletResponse res) {
+		log.info(">>>modify >> email >>"+email);
+		int isOk = msv.remove(email);
+		logout(req,res);
+		m.addAttribute("isOkDel", isOk);
+		return "index";
+		
+	}
+	
+	
+	private void logout(HttpServletRequest req, HttpServletResponse res) {
+		Authentication authentication = SecurityContextHolder
+				.getContext().getAuthentication();
+		new SecurityContextLogoutHandler().logout(req,res,authentication);
+				
 	}
 	
 	

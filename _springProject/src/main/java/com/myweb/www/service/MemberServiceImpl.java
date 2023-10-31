@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO mvo = new MemberVO(email, email, email, email, email, testAutVoList ); //여기까지 임시로 지나칠려는 의도
 		AuthMember amdto = new AuthMember(mvo); //새로 넣어줄려는 의도
 		amdto.setMvo(mdao.selectOne(email));	//bdao bvo호출 select * from board where bno=#{bno}
-		
+		log.info(">>>>> amdto >> "+amdto.toString());
 		return amdto;
 	}
 //	@Transactional
@@ -76,5 +76,32 @@ public class MemberServiceImpl implements MemberService {
 //
 //		return bdto;
 //	}
+
+
+	@Override
+	public int modify(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return mdao.modify(mvo);
+	}
+
+	@Override
+	public int modifyPwdEmpty(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return mdao.modifyPwdEmpty(mvo);
+	}
+	
+	
+	@Override
+	public int remove(String email) {
+			mdao.removeAuth(email);
+		return mdao.remove(email);
+	}
+
+	@Override
+	public MemberVO detail2(String email) {
+		// TODO Auto-generated method stub
+		return mdao.selectOne2(email);
+	}
+
 	
 }

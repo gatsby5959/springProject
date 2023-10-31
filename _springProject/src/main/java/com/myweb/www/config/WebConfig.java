@@ -41,8 +41,8 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	protected void customizeRegistration(ServletRegistration.Dynamic registeration) {
 		/* 그 외 기타 사용자 설정 */
 
-		// 사용자 지정 익셉션 설정을 할 것인지 처리
-		registeration.setInitParameter("throwExceptionIfNotHandlerFound", "true");
+		// 사용자 지정 익셉션 설정을 할 것인지 처리 404기본페이지를 좀 이쁘게 해주려고 true처리
+		registeration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 		
 		
 		/*파일 업로드 설정*/

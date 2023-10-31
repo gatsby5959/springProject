@@ -22,4 +22,15 @@ public interface MemberDAO {
 
 	MemberVO selectOne(String email);
 
+	
+	int modify(MemberVO mvo);
+	
+	int modifyPwdEmpty(MemberVO mvo);
+
+	int remove(String email);
+
+	void removeAuth(String email);
+
+	MemberVO selectOne2(String email);
+
 }

@@ -6,12 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<!-- <body> -->
-<!-- 일단 멤버 디테일 jsp진입 -->
-<!-- <script> -->
-<%--  console.log("mvo는 " + "${mvo}"); --%>
-<!-- </script> -->
-<!-- </body> -->
 
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -24,25 +18,32 @@
 <!-- 	private String regAt; -->
 <!-- 	private String lastLogin; -->
 <!-- 	private List<AuthVO> authVOList; -->
-	
+	<form action="/member/modify" method="post">
 	<div class="bigBox">
 		<table class="table">
 
 			<tr>
 				<th scope="col">Email</th>
-				<td>${mvo.email }</td><!-- bdto.삭제 전경환231025_00:40-->
+				<td>${mvo.email}</td><!-- -->
 			</tr>
-<%-- 			<tr> --%>
-<%-- 				<th scope="col">PWD</th> --%>
-<%-- 				<td>${mvo.pwd }</td>  bdto.삭제 전경환231025_00:40 --%>
-<%-- 			</tr> --%>
+
+			<tr>
+<!-- 				<th scope="col">PWD</th> -->
+<!-- 				<td> -->
+<%-- 					<input type="text" class="form-control"  name="pwd" id="p" value="${mvo.pwd}">		 --%>
+<!-- 				</td> -->
+<!-- 			</tr> $2a$10$29D5swWSM7v9jqSycKcuPuB0m3R5rhP9MeGnk7Mo1jE9ofl2UBNhO-->
+			
 			<tr>
 				<th scope="col">NICK_NAME</th>
-				<td>${mvo.nickName  }</td><!-- bdto.삭제 전경환231025_00:40-->
+				<td>
+					<input type="text" class="form-control"  name="nickName" id="n" value="${mvo.nickName}">
+				</td>
 			</tr>
+			
 			<tr>
 				<th scope="col">REG_AT</th>
-				<td>${mvo.regAt }</td><!-- bdto.삭제 전경환231025_00:40-->
+				<td>${mvo.regAt }</td><!-- -->
 			</tr>
 			<tr>
 				<th scope="col">LAST_LOGIN</th>
@@ -76,19 +77,17 @@
 <%-- 		<a	href="/board/list"><button class="btn btn-primary" type="button">리스트로</button></a> --%>
 <!-- 		<hr> -->
 		
-		<a href="/member/modify?email=${mvo.email}"><button	class="btn btn-primary" type="button">수정</button></a> 
-		<a href="/member/remove?email=${mvo.email}"><button	class="btn btn-primary" type="button">삭제</button></a> 
+<%-- 		<a href="/member/modify?email=${mvo.email}"><button	class="btn btn-primary" type="button">수정완료!</button></a>  --%>
+		
+		<input type="hidden" name="email" value="${mvo.email}">
+    <button class="btn btn-primary" type="submit">수정완료!</button>
+<%-- 		<a href="/member/remove?email=${mvo.email}"><button	class="btn btn-primary" type="button">삭제</button></a>  --%>
 		<a href="/member/list"><button class="btn btn-primary" type="button">리스트로</button></a>
 		
 
-		
-
-
-
-
-
 
 		</div>
+		</form>
 
 		<jsp:include page="../common/footer.jsp" />
 </body>

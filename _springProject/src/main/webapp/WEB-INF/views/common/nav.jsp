@@ -52,24 +52,23 @@ width: 100%;
         <c:choose>
            <c:when test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get() }">
            <li class="nav-item">
-           <a class="nav-link" href="/member/list">어드민> ${authNick }(${authEmail })</a>
+           <a class="nav-link" href="/member/list">어드민-> ${authNick }(${authEmail })</a>
            </li>
            </c:when>
            <c:otherwise>
            <li class="nav-item">
-           		<a class="nav-link" href="/detail?email=${authEmail }">${authNick }(${authEmail })</a>
+           		<a class="nav-link" href="/member/detail?email=${authEmail}">일반사용자-> ${authNick}(${authEmail})</a>
            </li>
            </c:otherwise>
         </c:choose>
            <li class="nav-item">
              <a class="nav-link" href="/board/register">Board Reg</a> <%-- 컨트롤러로~ --%>
            </li>
-		<li class="nav-item">
-		 	<a class="nav-link" href="/member/logout" id="logoutLink">LogOut</a>     
-        </li>
+			<li class="nav-item">
+			 	<a class="nav-link" href="" id="logoutLink">LogOut</a>     
+	        </li>
 	        <form action="/member/logout" method="post" id="logoutForm">
     	    	<input type="hidden" name="email" value="${authEmail}">
-	         
         	</form>
         </sec:authorize>
         
@@ -94,7 +93,7 @@ width: 100%;
 <script type="text/javascript">
 document.getElementById('logoutLink').addEventListener('click',(e)=>{
 	e.preventDefault();
-	document.getElementId('logoutForm').submit(); 
+	document.getElementById('logoutForm').submit(); 
 	})
 </script>
 

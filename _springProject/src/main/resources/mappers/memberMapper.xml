@@ -35,4 +35,22 @@ insert into auth_member values(#{email},'ROLE_USER')
 </select>
 
 
+<update id = "modifyPwdEmpty">
+update member set nick_name=#{nickName} where email=#{email}
+</update>
+<update id = "modify">
+update member set nick_name=#{nickName} where email=#{email}
+</update>
+<update id = "remove">
+delete from member where email = #{email}
+</update>
+<update id = "removeAuth">
+delete from auth member where email = #{email}
+</update>
+
+
+
+<select id= "selectOne2" resultType="com.myweb.www.security.MemberVO">
+	select * from member where email =#{email};
+</select>
 </mapper>

@@ -51,7 +51,8 @@ justify-content: center;
  				<c:forEach items="${list}" var="mvo"> 
  					<tr> 
  						<th><a href="/member/detail?email=${mvo.email}">${mvo.email }</a></th> 
- 						<td><a href="/member/detail?email=${mvo.email}">${mvo.pwd }</a></td> 
+<%--  						<td><a href="/member/detail?email=${mvo.email}">${mvo.pwd }</a></td>  --%>
+ 						<td><a href="/member/detail?email=${mvo.email}">암호화됨</a></td>
  						<td><a href="/member/detail?email=${mvo.email}">${mvo.nickName }</a></td> 
  						<td><a href="/member/detail?email=${mvo.email}">${mvo.regAt }</a></td> 
  						<td><a href="/member/detail?email=${mvo.email}">${mvo.lastLogin }</a></td>			 
