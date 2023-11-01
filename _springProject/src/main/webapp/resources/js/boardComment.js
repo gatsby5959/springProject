@@ -107,9 +107,9 @@ function printCommentList(bno, page = 1) { //page=1인거는 처음 뿌릴 때�
 }
 
 //삭제 함수
-async function remove(cno) {
+async function remove(cno,writer) {
     try {
-        const url = "/comment/remove/" + cno;
+        const url = "/comment/remove/"+cno+"/"+writer;
         const config = {
             method: "delete"
         };
@@ -123,8 +123,9 @@ async function remove(cno) {
 
 //수정 함수
 async function editCommentToServer(cmtDataMod) {
+    // console.log("editCommentToServer의 writer -> " + writer );
     try {
-        const url = "/comment/modify";
+        const url = "/comment/modify/";
         const config = {
             method: 'put',
             headers: {
@@ -149,7 +150,8 @@ document.addEventListener('click', (e) => {
     if (e.target.classList.contains('delBtn')) {
         let li = e.target.closest('li');
         let cno = li.dataset.cno;
-        remove(cno).then(result => {
+        let writer = li.dataset.writer; //231101추가
+        remove(cno, writer).then(result => {
             if (result > 0) {
                 alert('댓글 삭제 성공');
 
@@ -169,12 +171,22 @@ document.addEventListener('click', (e) => {
         document.getElementById('cmtTextModal').value = cmtText.nodeValue;
         //cmtModBtn에 data-cno 달기
         document.getElementById('cmtModBtn').setAttribute('data-cno', li.dataset.cno);
+
+        document.getElementById('cmtModBtn').setAttribute('data-writer', li.dataset.writer); //jgh231101
+   
     } else if (e.target.id == 'cmtModBtn') {
         let cmtDataMod = {
             cno: e.target.dataset.cno,
+            writer : e.target.dataset.writer, //231101추가
             content: document.getElementById('cmtTextModal').value
         };
+
+        console.log("댓글 수정 직전입니다!");
+
         console.log(cmtDataMod);
+
+        // if(cmtDataMod.writer!=sessionStorage.)
+
         editCommentToServer(cmtDataMod).then(result => {
             if (result > 0) {
                 alert('댓글 수정 성공');
@@ -185,6 +197,7 @@ document.addEventListener('click', (e) => {
             document.querySelector('.btn-close').click();
             printCommentList(bnoVal);
         })
+
     } else if (e.target.id == 'moreBtn') {
         printCommentList(bnoVal, parseInt(e.target.dataset.page));
     }

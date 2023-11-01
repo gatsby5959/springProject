@@ -38,7 +38,7 @@
 				<td>${bdto.bvo.content }</td><!-- bdto.삭제 전경환231025_00:40-->
 			</tr>
 			<tr>
-				<th scope="col">REG_DATE</th>
+				<th scope="col">REG_AT</th>
 				<td>${bdto.bvo.regAt }</td><!-- bdto.삭제 전경환231025_00:40-->
 			</tr>
 		</table>
@@ -124,12 +124,12 @@
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" id="cmtTextModal"
 									placeholder="Test Comment">
-								<button class="btn btn-primary" id="cmtModBtn" type="button">수정</button>
+								<button class="btn btn-primary" id="cmtModBtn" type="button">댓글수정</button>
 							</div>
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">Close</button>
+									data-bs-dismiss="modal">모달창닫기Close</button>
 
 							</div>
 						</div>
