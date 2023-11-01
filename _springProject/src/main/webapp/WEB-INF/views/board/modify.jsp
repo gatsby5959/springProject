@@ -86,8 +86,8 @@
 		
 		
 		
-		<button class="btn btn-primary" type="submit" id="regBtn">수정 완료</button>
-		<a	href="/board/list"><button class="btn btn-primary" type="button">리스트로</button></a>
+		<button class="btn btn-primary" type="submit" id="regBtn">게시글수정완료</button>
+		<a	href="/board/list"><button class="btn btn-primary" type="button">게시글리스트로</button></a>
 	
 	
 	
