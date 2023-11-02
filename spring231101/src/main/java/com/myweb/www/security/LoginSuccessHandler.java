@@ -1,7 +1,5 @@
 package com.myweb.www.security;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -9,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -27,11 +24,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
-
+	//231030
+	
 	@Getter
 	@Setter
 	private String authEmail; //만들고자 하는 곳의 멤버변수만
@@ -62,7 +59,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		//내부에서 로그인 세션 저장됨.
 		HttpSession ses = request.getSession();
 		log.info("LoginSuccess >>> ses >>> " + ses.toString() );
-	
+
 		//시큐리티에서 로그인 값이 없다면 null로 저장될 수(도) 있음.
 		if(!isOk || ses == null) {
 			return;
@@ -78,4 +75,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		// 처음이면 리스트를 넣고  이것저거것 있다면 로그인후 그페이지로 보내려고 getRedirectUrl가 있는듯 (로그인 값 이나 리스트 값으로 데이터를 보내줌)
 		rdstg.sendRedirect(request, response, (saveReq != null)? saveReq.getRedirectUrl() : getAuthUrl()  );
 	}
+
 }
