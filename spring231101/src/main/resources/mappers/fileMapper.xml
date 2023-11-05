@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.FileDAO">
+
+	<insert id="insertFile">
+		insert into file(uuid,save_dir,file_name,file_type,bno,file_size)
+		values(#{uuid},#{saveDir},#{fileName},#{fileType},#{bno},#{fileSize})
+	</insert>
+	
+	<select id="getFileList" resultType="com.myweb.www.domain.FileVO">
+		select * from file where bno=#{bno} order by reg_at desc
+	</select>
+	
+	<delete id = "removefile">
+	DELETE FROM file WHERE uuid = #{uuid}
+	</delete>
+	
+	
+	
+	<!-- 231026 -->
+<!-- 	<select id = "selectListAllFiles" resultType="com.myweb.www.domain.FileVO"> -->
+<!-- 		select * from file; -->
+<!-- 	</select> -->
+	
+
+<!-- 	<delete id = "deleteBnoFileAll"> -->
+<!-- 	DELETE FROM file WHERE bno = #{bno} -->
+<!-- 	</delete> -->
+
+	
+</mapper>

@@ -11,5 +11,43 @@
 		select * from board order by
 		bno desc
 	</select>
+	<select id="selectOne" resultType="com.myweb.www.domain.BoardVO">
+		select * from board where bno=#{bno}
+	</select>
+	<update id="update">
+	update board set
+	title=#{title}, content=#{content}, mod_at=now()
+	where bno = #{bno}
+	</update>
+	<delete id="delete">
+		delete from board where bno = #{bno}
+	</delete>
+	
+	<select id="selectOneBno" resultType="long">
+	select max(bno) from board;
+	</select>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board
+<!-- 		<include refid="search"></include> -->
+	</select>	
+		<select id="getList" resultType="com.myweb.www.domain.BoardVO">
+		select * from board
+<!-- 		<include refid="search"></include> -->
+		order by bno desc limit #{pageStart}, #{qty}
+	</select>
+	<update id="readCount">
+		update board set read_count=read_count+1 
+		where bno=#{bno}
+	</update>
+	<update id = "updateCommentCount" >
+		update board set cmt_qty = 
+		(select count(cno) from comment where bno = board.bno) 
+	</update>
+		<update id="updateFileCount">
+		update board set has_file = 
+		(select count(bno) from file where bno = board.bno) 
+	</update>
+
+	
 	
 </mapper>

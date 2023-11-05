@@ -33,6 +33,8 @@
 </div>
 <div class="mb-3" id="fileZone">
 	<!-- 첨부파일 표시될 영역 -->
+	
+	
 </div>
 	<hr>
 	<button type="submit" class="btn btn-primary" id="regBtn">등록</button>

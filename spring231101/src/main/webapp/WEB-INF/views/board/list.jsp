@@ -119,15 +119,16 @@ justify-content: center;
 		</div>
 	</div>
 
+
 	<script type="text/javascript">
 		const isOk = `<c:out value="${isOk}"/>`;
 		if (isOk > 0) {
-			alert("수정 완료");
+			alert("여긴list.jsp의<script> 수정 완료");
 		}
 
 		const reisOk = `<c:out value="${reisOk}"/>`;
 		if (reisOk > 0) {
-			alert("삭제 완료");
+			alert("여긴list.jsp의<script> 삭제 완료");
 		}
 	</script>
 	

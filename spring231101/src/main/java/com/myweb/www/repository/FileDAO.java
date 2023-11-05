@@ -8,10 +8,11 @@ public interface FileDAO {
 
 	int insertFile(FileVO fvo);
 
-//	List<FileVO> getFileList(long bno);
-//
-//	int removefile(String uuid);
-//
+	List<FileVO> getFileList(long bno);
+
+	int removefile(String uuid);
+	
+
 //	int deleteBnoFileAll(long bno);
 //
 //	List<FileVO> selectListAllFiles();
