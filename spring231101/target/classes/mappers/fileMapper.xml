@@ -18,11 +18,11 @@
 	</delete>
 	
 	
-	
+
 	<!-- 231026 -->
-<!-- 	<select id = "selectListAllFiles" resultType="com.myweb.www.domain.FileVO"> -->
-<!-- 		select * from file; -->
-<!-- 	</select> -->
+	<select id = "selectListAllFiles" resultType="com.myweb.www.domain.FileVO">
+		select * from file;
+	</select>
 	
 
 <!-- 	<delete id = "deleteBnoFileAll"> -->

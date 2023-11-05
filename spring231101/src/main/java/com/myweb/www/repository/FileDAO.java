@@ -11,10 +11,11 @@ public interface FileDAO {
 	List<FileVO> getFileList(long bno);
 
 	int removefile(String uuid);
+
+	List<FileVO> selectListAllFiles();
 	
 
 //	int deleteBnoFileAll(long bno);
-//
-//	List<FileVO> selectListAllFiles();
+
 
 }
