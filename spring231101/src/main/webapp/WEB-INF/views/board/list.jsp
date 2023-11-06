@@ -24,10 +24,6 @@ justify-content: center;
 	<jsp:include page="../common/header.jsp" />
 	<jsp:include page="../common/nav.jsp" />
 
-
-
-
-
 	<!-- 검색 라인 -->
 	<div class="container-fluid">
 		<form action="/board/list" class="d-flex" role="search" method="get">
@@ -119,22 +115,17 @@ justify-content: center;
 		</div>
 	</div>
 
-
 	<script type="text/javascript">
 		const isOk = `<c:out value="${isOk}"/>`;
 		if (isOk > 0) {
-			alert("여긴list.jsp의<script> 수정 완료");
+			alert("수정 완료");
 		}
 
 		const reisOk = `<c:out value="${reisOk}"/>`;
 		if (reisOk > 0) {
-			alert("여긴list.jsp의<script> 삭제 완료");
+			alert("삭제 완료");
 		}
 	</script>
-	
-	
-	
-	
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

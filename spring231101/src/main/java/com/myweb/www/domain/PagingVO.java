@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ToString
 public class PagingVO {
-	
 	private int pageNo; // 현재 페이지 번호
 	private int qty;// 한 페이지에 보여져야 하는 게시글 수
 
@@ -40,6 +39,5 @@ public class PagingVO {
 	public String[] getTypeToArray() {
 		return this.type == null ? new String[] {} : this.type.split("");
 	}
-
 
 }

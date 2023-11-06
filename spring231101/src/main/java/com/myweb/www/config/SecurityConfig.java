@@ -65,8 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();  //요건 나중에 설명해줄꼐용 쌤曰
 		//승인요청
 		http.authorizeRequests()
-		.antMatchers("/member/list").hasRole("ADMIN")                                                                          //아래는 그냥 아무나 접근 가능한 페이지들 일단 보드 레지스터 이하 일단 풀어둠 나중에 막을것임
-		.antMatchers("/","/board/list","/board/detail","/resources/**","/upload/**","/comment/**","/member/register","/member/login" 		,"/board/register","/board/modify","/board/remove","/board/file/**").permitAll()
+		.antMatchers("/member/list").hasRole("ADMIN")
+		.antMatchers("/","/board/list","/board/detail","/resources/**","/upload/**","/comment/**","/member/register","/member/login").permitAll()
 		.anyRequest().authenticated(); //나머지 리퀘스트는 인증된 사용자만 사용할수 있게           //비회원도 되는것이 PermitAll()   //나중에 comment/**할때는 퍼미션으로 가면 됨 post modify등
 		// '맴버의 리스트'는 ADMIN만 보이게...
 		

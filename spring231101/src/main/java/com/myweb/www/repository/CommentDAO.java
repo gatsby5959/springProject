@@ -11,12 +11,20 @@ public interface CommentDAO {
 
 	int insert(CommentVO cvo);
 
-	int selectOneBnoTotalCount(long bno);
+//	List<CommentVO> selectAll(long bno);
 
-	List<CommentVO> selectListPaging(@Param("bno") long bno, @Param("pgvo") PagingVO pgvo);
+	int delete(long cno);
+
+	int deleteCommentAll(long bno);
 
 	int update(CommentVO cvo);
 
-	int delete(long cno);
-	
+	int selectOneBnoTotalCount(long bno);
+
+	List<CommentVO> selectListPaging(@Param("bno") long bno,@Param("pgvo") PagingVO pgvo);
+
+//	void cmt_update(long bno);
+
+
+
 }

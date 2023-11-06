@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>	    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login here</title>
+<title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
 <jsp:include page="../common/nav.jsp"/>
+
+
 
 
 
@@ -46,7 +48,6 @@
 		<button class="w-100 btn btn-primary btn-lg my-5" type="submit">login로그인</button>
 	</form>
 </div>
-
 
 
 

@@ -2,6 +2,9 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.PagingVO;
 
@@ -15,19 +18,26 @@ public interface BoardDAO {
 
 	int update(BoardVO bvo);
 
+	BoardVO SelectOneForModify(long bno);
+
 	int delete(long bno);
-
-	long selectOneBno();
-
-	int getTotalCount(PagingVO pagingVO);
-
-	List<BoardVO> getList(PagingVO pagingVO);
 
 	void readCount(long bno);
 
-	int updateCommentCount();
+	List<BoardVO> getList(PagingVO pagingVO);
 
+	int getTotalCount(PagingVO pagingVO);
+
+	long selectOneBno();
+
+	int updateCommentCount();
 	int updateFileCount();
+	
+	int deleteCommentAll(long bno);
+
+	void minusReadCount(long bno);
 
 	
+
+//	int removefile(String uuid);
 }

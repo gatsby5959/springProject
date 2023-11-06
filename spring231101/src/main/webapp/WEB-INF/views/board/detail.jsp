@@ -78,25 +78,29 @@
 		<hr>
 		
 
-
+		
 		<!-- 댓글 라인 -->
 		<div class="container">
 			<!-- 댓글 등록 라인 -->
-	<%-- 	<sec:authorize access="isAuthenticated()"> --%>
-	<%-- 	<sec:authentication property="principal.mvo.email" var = "authEmail"/> --%>
+			<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.mvo.email" var = "authEmail"/>
 			<div class="input-group mb-3">
-					<span class="input-group-text" id="cmtWriter">${authEmail}임시추가글자</span> 
-					<input	type="text" class="form-control" id="cmtText"	placeholder="Test Comment">					
-					<button class="btn btn-primary" id="cmtPostBtn" type="button">댓글등록</button>
-	<%-- 	</sec:authorize>		 --%>
+				<span class="input-group-text" id="cmtWriter">${authEmail}</span> 
+				<input
+					type="text" class="form-control" id="cmtText"
+					placeholder="Test Comment">
+				
+				<button class="btn btn-primary" id="cmtPostBtn" type="button">댓글등록</button>
+			</sec:authorize>
+
+				
 			</div>
+
 
 			<!-- 댓글 표시 라인 -->
 			<ul class="list-group list-group-flush" id="cmtListArea">
 			</ul>
 
-	
-	
 			<!-- 댓글 더보기 버튼 -->
 			<div>
 				<div>
@@ -105,8 +109,6 @@
 						class="btn btn-outline-dark" style="visibility: hidden">MORE+</button>
 				</div>
 			</div>
-	
-	
 
 			<!-- 모달창 -->
 			<div class="modal" id="myModal" tabindex="-1">
@@ -117,28 +119,25 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-	
+
 						<div class="modal-body">
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" id="cmtTextModal"
 									placeholder="Test Comment">
 								<button class="btn btn-primary" id="cmtModBtn" type="button">댓글수정</button>
 							</div>
-	
+
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal">모달창닫기Close</button>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-		
 		</div>
-		
-		
-		
 		<script type="text/javascript">
 			let bnoVal = `<c:out value="${bvo.bno}"/>`;
 			console.log("bnoVal>>> " + bnoVal);

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.myweb.www.domain.BoardDTO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
 import com.myweb.www.service.MemberService;
@@ -73,70 +75,89 @@ public class MemberController {
 	
 	}
 
-//	
+//이하 보드 컨트롤러 그냥 복붙해서 참고중인 상태임 231030
+//리스트 출력(paging 추가)
+//	@GetMapping("/list")
+//	public String list(Model model, PagingVo pagingVO) {
+//		log.info(">>>>>>pagingVO >>" + pagingVO);
 //
-//	@GetMapping({"/detail"})
-//	public void detail(Model model, @RequestParam("email")String email) {
+//		//댓글 수 구하기는 글
 //
-//		MemberVO mvo = msv.detail2(email);
-//		log.info("mvo는 "+ mvo);
-//		model.addAttribute("mvo",mvo);	//이러면void니 detail.jsp로 모델에 쌓아서 날아가는듯 
-//	}
-//	
+//		// 이렇게 하면 service에서 return값 설정해주면 됨
+//		model.addAttribute("list", bsv.getList(pagingVO));
 //
-//	
-//
-//	@GetMapping("/modify")
-//	public void modify(@RequestParam("email") String email, Model m) {
-//		log.info(">>>> 겟메핑 modify>>> email >>> " + email);
-//		log.info(">>>> modify>>> email >>> " + email);
-//		m.addAttribute("mvo", msv.detail2(email));
-//		log.info("m "+m);
-//		log.info("모디파이 겟메핑 끝");
+//		/* 페이징 처리 */
+//		// 총 페이지 갯수
+//		int totalCount = bsv.getTotalCount(pagingVO);
+//		PagingHandler ph = new PagingHandler(pagingVO, totalCount);
+//		model.addAttribute("ph", ph);
+//		log.info("겟메핑 /list 탐");
+//		return "/board/list";
 //	}
-//	
-//	@PostMapping({"/modify"})
-//	public void modify(MemberVO mvo, Model m , HttpServletRequest req, HttpServletResponse res) {
-//		log.info(">>>> 포스트 메핑 modify>>> mvo >>> " + mvo);
-//		log.info("2222222222222222222222");
-//		int isOk = 3;
-////		log.info("mvo.getPwd().isEmpty()의 값 "+mvo.getPwd().isEmpty());
-//		if(mvo.getPwd()==null||mvo.getPwd().isEmpty()) {
-//			log.info("if(mvo.getPwd().isEmpty())"+"진입");
-//			isOk = msv.modifyPwdEmpty(mvo);
-//		}else {
-//			log.info("mvo.getPwd().isEmpty()의 else{}"+"진입");
-//			mvo.setPwd(bcEncoder.encode(mvo.getPwd()));
-//			isOk = msv.modify(mvo);
-//		}
-//		log.info("if문 지난 위치");
-//		logout(req,res);
-//		
-//		m.addAttribute("isOk",isOk);
-//		log.info(">>>> 포스트 메핑 modify 끝");	
-//	}
-//	
-//	
-//	
-//	
-//	@GetMapping("/remove")
-//	public String removeMember(@RequestParam("email") String email, Model m,
-//			HttpServletRequest req, HttpServletResponse res) {
-//		log.info(">>>modify >> email >>"+email);
-//		int isOk = msv.remove(email);
-//		logout(req,res);
-//		m.addAttribute("isOkDel", isOk);
-//		return "index";
-//		
-//	}
-//	
-//	
-//	private void logout(HttpServletRequest req, HttpServletResponse res) {
-//		Authentication authentication = SecurityContextHolder
-//				.getContext().getAuthentication();
-//		new SecurityContextLogoutHandler().logout(req,res,authentication);
-//				
-//	}
+	
+
+	@GetMapping({"/detail"})
+	public void detail(Model model, @RequestParam("email")String email) {
+
+		MemberVO mvo = msv.detail2(email);
+		log.info("mvo는 "+ mvo);
+		model.addAttribute("mvo",mvo);	//이러면void니 detail.jsp로 모델에 쌓아서 날아가는듯 
+	}
+	
+
+	
+
+	@GetMapping("/modify")
+	public void modify(@RequestParam("email") String email, Model m) {
+		log.info(">>>> 겟메핑 modify>>> email >>> " + email);
+		log.info(">>>> modify>>> email >>> " + email);
+		m.addAttribute("mvo", msv.detail2(email));
+		log.info("m "+m);
+		log.info("모디파이 겟메핑 끝");
+	}
+	
+	@PostMapping({"/modify"})
+	public void modify(MemberVO mvo, Model m , HttpServletRequest req, HttpServletResponse res) {
+		log.info(">>>> 포스트 메핑 modify>>> mvo >>> " + mvo);
+		log.info("2222222222222222222222");
+		int isOk = 3;
+//		log.info("mvo.getPwd().isEmpty()의 값 "+mvo.getPwd().isEmpty());
+		if(mvo.getPwd()==null||mvo.getPwd().isEmpty()) {
+			log.info("if(mvo.getPwd().isEmpty())"+"진입");
+			isOk = msv.modifyPwdEmpty(mvo);
+		}else {
+			log.info("mvo.getPwd().isEmpty()의 else{}"+"진입");
+			mvo.setPwd(bcEncoder.encode(mvo.getPwd()));
+			isOk = msv.modify(mvo);
+		}
+		log.info("if문 지난 위치");
+		logout(req,res);
+		
+		m.addAttribute("isOk",isOk);
+		log.info(">>>> 포스트 메핑 modify 끝");	
+	}
+	
+	
+	
+	
+	@GetMapping("/remove")
+	public String removeMember(@RequestParam("email") String email, Model m,
+			HttpServletRequest req, HttpServletResponse res) {
+		log.info(">>>modify >> email >>"+email);
+		int isOk = msv.remove(email);
+		logout(req,res);
+		m.addAttribute("isOkDel", isOk);
+		return "index";
+		
+	}
+	
+	
+	private void logout(HttpServletRequest req, HttpServletResponse res) {
+		Authentication authentication = SecurityContextHolder
+				.getContext().getAuthentication();
+		new SecurityContextLogoutHandler().logout(req,res,authentication);
+				
+	}
 	
 	
 }

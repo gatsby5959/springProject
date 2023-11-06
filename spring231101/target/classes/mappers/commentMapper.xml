@@ -3,31 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.myweb.www.repository.CommentDAO">
-
   <insert id="insert">
   insert into comment(bno,writer,content)
   values(#{bno},#{writer},#{content})
   </insert>
-  <select id="selectOneBnoTotalCount" resultType="int">
-  select count(*) from comment where bno=#{bno}
-  </select>
-  <select id="selectListPaging" resultType="com.myweb.www.domain.CommentVO">
-  select * from comment 
-  where bno=#{bno} order by cno desc
-  limit #{pgvo.pageStart}, #{pgvo.qty} <!-- 파라미터 값이 2개라서(bno,pgvo) pgvo.써주는 거임 -->
-  </select>
+ <select id="selectAll" resultType="com.myweb.www.domain.CommentVO">
+ select * from comment where bno=#{bno}
+ </select>
+ 
+ <delete id="delete">
+ delete from comment where cno=#{cno}
+ </delete>
+  <delete id="deleteCommentAll">
+  delete from comment where bno=#{bno}
+  </delete>
   <update id="update">
   update comment set content=#{content}, mod_at=now() 
   where cno=#{cno}
   </update>
-  <delete id="delete">
-  delete from comment where cno=#{cno}
-  </delete>
-  
-  
+  <select id="selectOneBnoTotalCount" resultType="int">
+  select count(*) from comment where bno=#{bno}
+  </select>
+  <select id="selectListPaging" resultType="com.myweb.www.domain.CommentVO">
+  select * from comment where bno=#{bno}
+  order by cno desc
+  limit #{pgvo.pageStart}, #{pgvo.qty}<!-- 파라미터 값이 2개라서(bno,pgvo) pgvo.써주는 거임 -->
+  </select>
+<!--   <update id="cmt_update"> -->
+<!--   update board set commentCount= commentCount+1 where bno = #{bno}; -->
+<!--   </update> -->
   
   
   </mapper>
- 
-
   

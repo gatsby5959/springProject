@@ -12,22 +12,18 @@
 	<select id="getFileList" resultType="com.myweb.www.domain.FileVO">
 		select * from file where bno=#{bno} order by reg_at desc
 	</select>
-	
-	<delete id = "removefile">
-	DELETE FROM file WHERE uuid = #{uuid}
-	</delete>
-	
-	
-
 	<!-- 231026 -->
 	<select id = "selectListAllFiles" resultType="com.myweb.www.domain.FileVO">
 		select * from file;
 	</select>
 	
+	<delete id = "removefile">
+	DELETE FROM file WHERE uuid = #{uuid}
+	</delete>
 
-<!-- 	<delete id = "deleteBnoFileAll"> -->
-<!-- 	DELETE FROM file WHERE bno = #{bno} -->
-<!-- 	</delete> -->
+	<delete id = "deleteBnoFileAll">
+	DELETE FROM file WHERE bno = #{bno}
+	</delete>
 
 	
 </mapper>

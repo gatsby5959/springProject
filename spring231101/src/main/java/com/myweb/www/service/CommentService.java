@@ -1,17 +1,23 @@
 package com.myweb.www.service;
 
+import java.util.List;
+
 import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.PagingHandler;
 
 public interface CommentService {
-	
+
 	int addComment(CommentVO cvo);
 
-	PagingHandler getList(long bno, PagingVO pgvo);
+//	List<CommentVO> getList(long bno);
+
+	int remove(long cno);
+
+	void deleteCommentAll(long bno);
 
 	int modify(CommentVO cvo);
 
-	int remove(long cno);
-	
+	PagingHandler getList(long bno, PagingVO pgvo);
+
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>	    
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,26 +43,25 @@ width: 100%;
         
         <%-- 버튼모양이 안이뻐서 아래처럼 해서 a링크를 누르면  id logoutform을 서브밋해서 보네 --%>
         <%-- 로그인 해야 open 되는 메뉴들... --%>
+         <sec:authorize access="isAuthenticated()">
         
-<%--           <sec:authorize access="isAuthenticated()">                             --%>
-<%--        <sec:authentication property="principal.mvo.email" var="authEmail"/>      --%>
-<%--        <sec:authentication property="principal.mvo.nickName" var="authNick"/>    --%>
-<%--        <sec:authentication property="principal.mvo.authVOList" var="auths"/>     --%>
-        <%--MemberVO의 private List<AuthVO> authVOList;에서의 값 --%>
+        <sec:authentication property="principal.mvo.email" var="authEmail"/>
+        <sec:authentication property="principal.mvo.nickName" var="authNick"/>
+        <sec:authentication property="principal.mvo.authVOList" var="auths"/> <%--MemberVO의 private List<AuthVO> authVOList;에서의 값 --%>
         
-<%--         <c:choose> --%>
-<%--            <c:when test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get() }"> --%>
-<%--            <li class="nav-item"> --%>
-<%--            <a class="nav-link" href="/member/list">어드민-> ${authNick }(${authEmail })</a> --%>
-<%--            </li> --%>
-<%--            </c:when> --%>
-<%--            <c:otherwise> --%>
-<%--            <li class="nav-item"> --%>
-<%--            		<a class="nav-link" href="/member/detail?email=${authEmail}">일반사용자-> ${authNick}(${authEmail})</a> --%>
-<%--            </li> --%>
-<%--            </c:otherwise> --%>
-<%--         </c:choose> --%>
-            <li class="nav-item">
+        <c:choose>
+           <c:when test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get() }">
+           <li class="nav-item">
+           <a class="nav-link" href="/member/list">어드민-> ${authNick }(${authEmail })</a>
+           </li>
+           </c:when>
+           <c:otherwise>
+           <li class="nav-item">
+           		<a class="nav-link" href="/member/detail?email=${authEmail}">일반사용자-> ${authNick}(${authEmail})</a>
+           </li>
+           </c:otherwise>
+        </c:choose>
+           <li class="nav-item">
              <a class="nav-link" href="/board/register">Board Reg</a> <%-- 컨트롤러로~ --%>
            </li>
 			<li class="nav-item">
@@ -68,17 +70,17 @@ width: 100%;
 	        <form action="/member/logout" method="post" id="logoutForm">
     	    	<input type="hidden" name="email" value="${authEmail}">
         	</form>
-<%--          </sec:authorize> --%>
+        </sec:authorize>
         
-        <%-- 썡 인증이 시도하지 않은 애들은 아래가 보임 비회원 일단 로그인 하라고 함 --%>
-<%--         <sec:authorize access="isAnonymous()"> --%>
-<%-- 	        <li class="nav-item"> --%>
-<%-- 	          <a class="nav-link" href="/member/register">memberSignUp회원가입</a>  --%>
-<%-- 	        </li> --%>
-<%-- 	        <li class="nav-item"> --%>
-<%-- 	          <a class="nav-link" href="/member/login">memberLogIn</a>  --%>
-<%-- 	        </li> --%>
-<%-- 		</sec:authorize> --%>
+        <%-- 썡 인증이 시도하지 않은 애들은 아래가 보임 비회원 --%>
+        <sec:authorize access="isAnonymous()">
+	        <li class="nav-item">
+	          <a class="nav-link" href="/member/register">memberSignUp회원가입</a> 
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="/member/login">memberLogIn</a> 
+	        </li>
+		</sec:authorize>
         
       </ul>
     </div>

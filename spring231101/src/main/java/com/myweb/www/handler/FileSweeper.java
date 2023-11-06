@@ -18,18 +18,20 @@ import com.myweb.www.repository.FileDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
+//231026
+
 @Slf4j
 @Component
 @EnableScheduling
-public class FileSweeper {
+public class FileSweeper { 
 
-private final String BASE_PATH = "D:\\_myweb\\_java\\fileupload\\";
+	private final String BASE_PATH = "D:\\_myweb\\_java\\fileupload\\";
 	
 	@Inject
 	private FileDAO fdao;
 	
 	//                초 분 시 일 월 요일 년도(생략 가능)      //크론 표현식 검색해볼것...
-	@Scheduled(cron = "10 * * * * *")   //ex ) 일주일에 한번 한달에 한번
+	@Scheduled(cron = "0 0 21 * * *")   //ex ) 일주일에 한번 한달에 한번
 	public void fileSweeper() throws Exception {
 		log.info(">>> FileSweeper Running Start : {} "+LocalDateTime.now());
 		
@@ -72,3 +74,8 @@ private final String BASE_PATH = "D:\\_myweb\\_java\\fileupload\\";
 		log.info(">>> FileSweeper Running end : {} "+LocalDateTime.now());
 	}
 }
+
+
+
+
+

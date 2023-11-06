@@ -4,35 +4,36 @@ import java.util.List;
 
 import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
-//import com.myweb.www.domain.BoardVO;
-//import com.myweb.www.domain.FileVO;
-//import com.myweb.www.domain.PagingVo;
+import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
+
 
 public interface BoardService {
 
-	int write(BoardDTO boardDTO);
-	
-//	List<BoardVO> getList();	
-//	Object getList(PagingVO pagingVO);<---이렇게 보이는걸 아래처럼 바꿔야함
-	List<BoardVO> getList(PagingVO pagingVO);
-	
-	BoardDTO detail2(long bno);
-	
-	int modifyFile(BoardDTO bdto);
+//	int write(BoardVO bvo);
+
+	List<BoardVO> getList();
+
+//	BoardVO detail(long bno);
+
+//	int modify(BoardVO bvo);
+
+	BoardVO SelectOneForModify(long bno);
 
 	int remove(long bno);
 
+	List<BoardVO> getList(PagingVO pagingVO);
+
 	int getTotalCount(PagingVO pagingVO);
+
+	int write(BoardDTO boardDTO);
+
+	List<FileVO> getFileList(long bno);
+
+	BoardDTO detail2(long bno);
 
 	int removefile(String uuid);
 
-//	BoardVO SelectOneForModify(long bno);	
-	
-//	List<FileVO> getFileList(long bno);
-
-//	int removefile(String uuid);
-//
-
+	int modifyFile(BoardDTO bdto);
 
 }

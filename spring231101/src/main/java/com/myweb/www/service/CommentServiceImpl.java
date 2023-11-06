@@ -15,8 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class CommentServiceImpl implements CommentService {
-	
+public class CommentServiceImpl implements CommentService{
 	private CommentDAO cdao;
 	
 	@Autowired
@@ -24,16 +23,35 @@ public class CommentServiceImpl implements CommentService {
 		this.cdao =cdao;
 	}
 
+	@Override
 	public int addComment(CommentVO cvo) {
-		// TODO Auto-generated method stub
-		log.info("addComment진입 "+ cvo);
+//		cdao.cmt_update(cvo.getBno());
 		return cdao.insert(cvo);
+	}
+
+//	@Override
+//	public List<CommentVO> getList(long bno) {
+//		return cdao.selectAll(bno);
+//	}
+
+	@Override
+	public int remove(long cno) {
+		return cdao.delete(cno);
+	}
+
+	@Override
+	public void deleteCommentAll(long bno) {
+		cdao.deleteCommentAll(bno);
+	}
+
+	@Override
+	public int modify(CommentVO cvo) {
+		return cdao.update(cvo);
 	}
 
 	@Transactional
 	@Override
 	public PagingHandler getList(long bno, PagingVO pgvo) {
-		// TODO Auto-generated method stub
 		// totalCount 구하기
 		int totalCount = cdao.selectOneBnoTotalCount(bno);
 		// Comment List 찾아오기
@@ -44,16 +62,8 @@ public class CommentServiceImpl implements CommentService {
 		return ph;
 	}
 
-	@Override
-	public int modify(CommentVO cvo) {
-		// TODO Auto-generated method stub
-		return cdao.update(cvo);
-	}
 
-	@Override
-	public int remove(long cno) {
-		// TODO Auto-generated method stub
-		return cdao.delete(cno);
-	}
+	
+
 
 }
