@@ -67,10 +67,19 @@ public class MemberController {
 	
 	
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Model model , PagingVO pagingVO) {
 		//231030전경환
-		model.addAttribute("list", msv.getList()); 
+		model.addAttribute("list", msv.getList(pagingVO)); 
 		log.info("모델은 "+model);
+		
+//		log.info("페이지정보"+ph);
+		/* 페이징 처리 */
+		// 총 페이지 갯수
+		int totalCount = msv.getTotalCount(pagingVO);
+		PagingHandler ph = new PagingHandler(pagingVO, totalCount);
+		model.addAttribute("ph", ph);
+		log.info("페이지정보"+ph);
+		log.info("겟메핑 /list 탐");
 		return "/member/list";
 	
 	}

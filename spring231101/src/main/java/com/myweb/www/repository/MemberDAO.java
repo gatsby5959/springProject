@@ -2,7 +2,7 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
-
+import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
 
@@ -18,7 +18,7 @@ public interface MemberDAO {
 
 	int updateLastLogin(String authEmail);
 
-	List<MemberVO> selectAll();
+	List<MemberVO> selectAll(PagingVO pagingVO);
 
 	MemberVO selectOne(String email);
 
@@ -32,5 +32,7 @@ public interface MemberDAO {
 	void removeAuth(String email);
 
 	MemberVO selectOne2(String email);
+
+	int getTotalCount(PagingVO pagingVO);
 
 }

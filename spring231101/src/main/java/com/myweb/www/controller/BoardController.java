@@ -1,7 +1,9 @@
 package com.myweb.www.controller;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 
@@ -114,8 +119,6 @@ public class BoardController {
 
 		//댓글 수 구하기는 글
 		
-		
-		
 		// 이렇게 하면 service에서 return값 설정해주면 됨
 		model.addAttribute("list", bsv.getList(pagingVO));
 
@@ -169,44 +172,42 @@ public class BoardController {
 //	} 231025_00:40
 
 	// 수정
-	@PostMapping("/modify")
+	@PostMapping(value="/modify")
 	public String modify(BoardVO bvo, RedirectAttributes reAttr,
-			@RequestParam(name="files", required=false)MultipartFile[] files) {
+			@RequestParam(name="files", required=false)MultipartFile[] files , Principal principal) {
 
-		//		int isOk = bsv.modify(bvo);
-//		
-//		red.addAttribute("bno", bvo.getBno()); //Flash삭제 1번쓰고 사라지는 값같은게 Flash라 그냥 없애버림 (뭔가안되서..) //전경환 수정231025_00:40
-////		//위와 같이 하면 return "redirect:/board/detail?bno="+bvo.getBno(); 하는 거와 같음
-//		red.addFlashAttribute("isOk", isOk);
-//		return "redirect:/board/detail";
-		
 		log.info("모디파이가 포스트를 탐");
+		log.info("프린시펄"+principal);
 		log.info(">>>> modify bvo >> " + bvo);
-		
+		log.info("bvo.getWriter()는 "+principal.getName() +"       bvo.getWriter()는"+ bvo.getWriter() );
+		if(Objects.equals(principal.getName(), bvo.getWriter())) {
+		    log.info("현재접속자와 현재 글 작성자가 일치합니다");
+		    
 		List<FileVO> flist = null;
 		if(files[0].getSize() > 0) {
 			//기존 파일은 이미 DB에 등록완료 삭제할 파일은 비동기로 이미 삭제 완료
 			//새로 추가할 파일만 추가 
 			//file이 존재함
 			flist = fh.uploadFiles(files); //fvo 구성 List로 리턴
-//			bvo.setFileCount(flist.size());
+
 		}
 		log.info(">>>> flist.length >> " + files.length);
 		BoardDTO bdto = new BoardDTO(bvo,flist);
 		log.info("bdto = {}", bdto);
 		int isOk = bsv.modifyFile(bdto);
+		
+		}else {
+			log.info("현재접속자, 현재글 작성자 다름");
+			 reAttr.addFlashAttribute("errorMessage", "현재접속자와 글 작성자가 일치하지 않습니다. 글 수정이 불가합니다.");
+			 return "redirect:/board/detail?bno=" + bvo.getBno();
+		}
 
-//		int isOk = bsv.modify(bvo);
-		
-//		log.info(">>>> board modify >> "+ (isOk>0? "OK" : "FAIL"));
-//		reAttr.addFlashAttribute(null, reAttr);
 		return "redirect:/board/detail?bno="+bvo.getBno();
-		
-		
-		
 		
 	}
 
+
+	
 	// 삭제
 	@GetMapping("/remove")
 	public String remove(@RequestParam("bno") long bno, RedirectAttributes red) {

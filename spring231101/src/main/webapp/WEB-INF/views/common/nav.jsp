@@ -50,7 +50,7 @@ width: 100%;
         <sec:authentication property="principal.mvo.authVOList" var="auths"/> <%--MemberVO의 private List<AuthVO> authVOList;에서의 값 --%>
         
         <c:choose>
-           <c:when test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get() }">
+           <c:when test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get()}">
            <li class="nav-item">
            <a class="nav-link" href="/member/list">어드민-> ${authNick }(${authEmail })</a>
            </li>

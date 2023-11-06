@@ -146,6 +146,22 @@
 		<script type="text/javascript">
 			printCommentList(bnoVal);
 		</script>
+		
+		
+		
+		<script type="text/javascript">
+		// 페이지가 로드될 때 실행되는 함수
+		window.onload = function() {
+		  // Flash attribute로 전달된 메시지가 있는지 확인
+		  var message = "<c:out value='${errorMessage}'/>";
+		  if(message != null && message != "") {
+		    alert(message); // 메시지가 있다면 alert으로 표시
+		  }
+		};
+		</script>
+		
+		
+		
 		<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

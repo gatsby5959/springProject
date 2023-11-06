@@ -27,7 +27,10 @@ insert into auth_member values(#{email},'ROLE_USER')
 </update>
 
 <select id= "selectAll" resultType="com.myweb.www.security.MemberVO">
-	select * from member;
+	select * from member
+	<include refid="search"></include> 
+    limit #{pageStart}, #{qty}
+	
 </select>
 
 <select id= "selectOne" resultType="com.myweb.www.security.MemberVO">
@@ -53,4 +56,31 @@ delete from auth member where email = #{email}
 <select id= "selectOne2" resultType="com.myweb.www.security.MemberVO">
 	select * from member where email =#{email};
 </select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board
+		<include refid="search"></include>
+	</select>
+
+
+
+  <sql id="search">
+     <if test="type != null">
+        <trim prefix="where" prefixOverrides="or">
+           <foreach collection="typeToArray" item="typed">
+              <trim prefix="or">
+                 <choose>
+                    <when test="typed =='e'.toString()">
+                       email like concat('%',#{keyword},'%')
+                    </when>
+                    <when test="typed =='n'.toString()">
+                       nick_name like concat('%',#{keyword},'%')
+                    </when>
+                 </choose>
+              </trim>
+           </foreach>
+        </trim>
+     </if>
+  </sql>
+
 </mapper>

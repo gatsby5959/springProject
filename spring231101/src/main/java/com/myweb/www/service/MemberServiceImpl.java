@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.FileVO;
+import com.myweb.www.domain.PagingVO;
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.AuthVO;
@@ -38,10 +39,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> getList() {
+	public List<MemberVO> getList(PagingVO pagingVO) {
 		// TODO Auto-generated method stub
 
-		return mdao.selectAll();
+		return mdao.selectAll(pagingVO);
 		
 	}
 
@@ -101,6 +102,12 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO detail2(String email) {
 		// TODO Auto-generated method stub
 		return mdao.selectOne2(email);
+	}
+
+	@Override
+	public int getTotalCount(PagingVO pagingVO) {
+		// TODO Auto-generated method stub
+		return mdao.getTotalCount(pagingVO);
 	}
 
 	
