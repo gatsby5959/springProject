@@ -67,39 +67,40 @@ public class RootConfig {
 	
 	@Bean
 	public DataSource dataSource() {
-		HikariConfig hikariConfig = new HikariConfig();
-		// log4jdbc-log4j2의 드라이버 클래스 url 사용
-		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-//		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/aj2002");
-		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://aj2002.cafe24.com:3306/aj2002");
-		hikariConfig.setUsername("aj2002");
-		hikariConfig.setPassword("k2m16ak47");
-		hikariConfig.setMaximumPoolSize(5); // 최대 커넥션 개수
-		hikariConfig.setMinimumIdle(5); // 최소 유휴 커넥션 개수(반드시 maximumPoolSize와 같은 값으로)
+	    HikariConfig hikariConfig = new HikariConfig();
+	    // MariaDB 드라이버 클래스로 변경
+	    hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
+	    // MariaDB JDBC URL로 변경, 포트는 MariaDB 기본 포트인 3306 사용
+//	    hikariConfig.setJdbcUrl("jdbc:mariadb://aj2002.cafe24.com:3306/aj2002");
+//	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/springdb");
+	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/aj2002");
+	    hikariConfig.setUsername("aj2002");
+	    hikariConfig.setPassword("k2m16ak47");
+	    hikariConfig.setMaximumPoolSize(5);
+	    hikariConfig.setMinimumIdle(5);
 
-		hikariConfig.setConnectionTestQuery("SELECT now()"); // 첫 연결 test 구문 입력
-		hikariConfig.setPoolName("springHikariCP");
+	    hikariConfig.setConnectionTestQuery("SELECT 1");
+	    hikariConfig.setPoolName("springHikariCP");
 
-		// ▶config의 추가 설정
-		// cache 사용여부 true
-		hikariConfig.addDataSourceProperty("dataSource.cachePrepStmts", "true");
-		// mysql 드라이버가 한 연결당 cache statement의 수에 관한 설정(보통 default 25(250~500사이 권장))
-		hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSize", "250");
-		// mysql connection당 캐싱할 preparedStatement의 개수 지정 옵션(default 256)
-		hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSqlLimit", "2048"); // 기본값 256으로 설정
-		// mysql 서버에서 최신 이슈가 있을 경우 지원받는 설정 true
-		hikariConfig.addDataSourceProperty("dataSource.useServerPrepStmts", "true");
+	    // 여기서부터는 기본적인 HikariCP의 설정으로 마리아DB에 맞게 필요한 부분을 변경하거나 추가할 수 있습니다.
+	    hikariConfig.addDataSourceProperty("dataSource.cachePrepStmts", "true");
+	    hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSize", "250");
+	    // prepStmtCacheSqlLimit 값을 "true"에서 실제 제한 값으로 설정해야 합니다. (예: "2048")
+	    hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSqlLimit", "2048");
+	    hikariConfig.addDataSourceProperty("dataSource.useServerPrepStmts", "true");
 
-		HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
-		return hikariDataSource;
+	    HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
+	    return hikariDataSource;
 	}
+	
+	
 	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean sqlFactoryBean = new SqlSessionFactoryBean();
 		sqlFactoryBean.setDataSource(dataSource());
 		sqlFactoryBean.setMapperLocations(
-				applicationContext.getResources("classpath*:/mappers/**.*xml"));
+				applicationContext.getResources("classpath:/mappers/*.xml"));
 		sqlFactoryBean.setConfigLocation(
 				applicationContext.getResource("classpath:/MybatisConfig.xml"));
 		

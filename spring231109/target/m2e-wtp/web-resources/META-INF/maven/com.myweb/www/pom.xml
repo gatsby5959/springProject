@@ -81,7 +81,7 @@
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
-    <version>1.4.5</version>
+    <version>1.2.3</version>
     <!-- <scope>test</scope> -->
 </dependency>
 
@@ -90,7 +90,7 @@
 		<dependency>
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-core</artifactId>
-		    <version>1.4.5</version>
+		    <version>1.2.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
 		<dependency>
@@ -151,6 +151,12 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.32</version>
 		</dependency>
+		<!-- MariaDB JDBC driver -->
+		<dependency>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		    <version>2.7.2</version> <!-- 이곳에 원하는 버전을 사용하세요 -->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -167,7 +173,7 @@
 		<dependency>
 		   <groupId>com.zaxxer</groupId>
 		   <artifactId>HikariCP</artifactId>
-		   <version>5.0.1</version>
+		   <version>3.4.5</version>
 		</dependency>
 		<!-- util json file -->
 		<!-- 댓글관련 JSON  -->
