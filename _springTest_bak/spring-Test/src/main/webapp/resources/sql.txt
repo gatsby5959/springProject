@@ -1,0 +1,133 @@
+spring 초기 세팅
+sts (spring tool suite)
+레거시 프로젝트
+- 개발 환경 버전 체크
+- jdk 11/ sts 3.9.18 / mysql 기존 동일 / tomcat 기존동일
+- lombok 라이브러리 사용( sts사이트? 자체에 작용)
+(프로젝트에 상관없이 일단 프로그램에 넣어줘야함)
+레거시 프로젝트
+롬복1.18.30
+스프링(=어노테이션)
+게터세터 생성자 이런 건 lombok이 대체해줌
+
+- D 드라이브에 새폴더 영어로 생성
+
+- spring에서 package명은 3단계 로 설정
+- 보통 도메인을 거꾸로 사용
+- com.myweb.www
+- com.ezen.myproject
+
+-----------------------------------
+
+라이브러리 추가
+pom.xml -> 기존 값 수정
+
+db라인
+mysql-connector-java 8.0.28
+mybatis
+mybatis-spring
+
+--------------------------------------
+2023-10-04
+DB설정
+-- database 설정
+create database springtest;
+
+--user 설정
+create user springUser@localhost
+identified by 'mysql';
+
+-- 권한생성 구문
+grant all privileges on springtest.* to 
+springUser@localhost identified by 'mysql';
+
+-- 변경내용 메모리에 반영
+flush privileges
+
+
+----------------------
+
+use springtest;
+
+--------------------
+
+게시판 생성
+create table board(
+bno int not null auto_increment,
+title varchar(200),
+content text,
+writer varchar(100),
+isDel varchar(10) default 'N',
+registerDate datetime default now(),
+read_count int default 0,
+primary key(bno));
+
+CREATE TABLE `board` (
+  `bno` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) DEFAULT NULL,
+  `content` text,
+  `writer` varchar(100) DEFAULT NULL,
+  `isDel` varchar(10) DEFAULT 'N',
+  `registerDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `read_count` int DEFAULT '0',
+  PRIMARY KEY (`bno`)
+) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--------------------------------------------------
+
+
+-----------------------231006 멤버구문 추가---------
+create table member(
+id varchar(100) not null,
+pw varchar(100) not null,
+name varchar(100),
+email varchar(100),
+home varchar(100),
+age int,
+reg_date datetime default now(),
+primary key(id));
+
+CREATE TABLE `member` (
+  `id` varchar(100) NOT NULL,
+  `pw` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `home` varchar(100) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `reg_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+-----------231010----------------S
+CREATE TABLE comment (
+  cno int NOT NULL AUTO_INCREMENT,
+  bno int NOT NULL,
+  writer varchar(100) ,
+  content varchar(500) ,
+  regdate datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (cno)
+); 
+-----------231010----------------E
+
+
+
+-----------------231012--------
+2. DB table 설정
+create table file(
+uuid varchar(256) not null,
+save_dir varchar(256) not null,
+file_name varchar(256) not null,
+file_type tinyint(1) default 0,
+bno int,
+file_size int,
+reg_date datetime default now(),
+primary key(uuid));
+-----------------231012--------
+
+
+
+alter table board add fileCount int default 0;
+
+alter table board add commentCount int default 0;

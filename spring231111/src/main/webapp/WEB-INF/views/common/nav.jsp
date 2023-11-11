@@ -18,7 +18,7 @@ width: 100%;
 </head>
 <body>
 <header>
-<nav>
+<nav class="navbar navbar-default">
 <div class="boxZZZ" >
 <div class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">	
@@ -26,7 +26,7 @@ width: 100%;
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="nav navbar-nav me-auto mb-2 mb-lg-0 navbar-right">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
@@ -70,6 +70,13 @@ width: 100%;
 	        <form action="/member/logout" method="post" id="logoutForm">
     	    	<input type="hidden" name="email" value="${authEmail}">
         	</form>
+        	
+        	<li class="dropdown">
+	        	<a href="#" class="dropdown-toggle"
+	        		data-toggle="dropdown" role="button" aria-haspopup="true"
+	        		aria-expanded="false">회원관리<span class="caret"></span>
+	        	</a>
+	        </li>
         </sec:authorize>
         
         <%-- 썡 인증이 시도하지 않은 애들은 아래가 보임 비회원 --%>
@@ -80,6 +87,17 @@ width: 100%;
 	        <li class="nav-item">
 	          <a class="nav-link" href="/member/login">memberLogIn</a> 
 	        </li>
+	        <li class="dropdown nav-item">
+	        	<a href="#" class="dropdown-toggle nav-link"
+	        		data-toggle="dropdown" role="button" aria-haspopup="true"
+	        		aria-expanded="false">접속하기(로그인하기)<span class="caret"></span>
+	        	</a>
+	        	<ul class="dropdown-menu">
+	        		<li><a class="nav-link" href="/member/login">로그인</a></li>
+	        		<li><a class="nav-link" href="/member/register">회원가입</a></li>
+	        	</ul>
+	        </li>
+
 		</sec:authorize>
         
       </ul>
