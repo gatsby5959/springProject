@@ -1,0 +1,59 @@
+--2023-10-18
+
+create table board(
+bno bigint not null auto_increment,
+title varchar(200) not null,
+content text not  null,
+writer varchar(100) not null,
+reg_at datetime default now(),
+mod_at datetime default now(),
+read_count int default 0,
+cmt_qty int default 0,
+has_file int default 0,
+primary key(bno));
+
+--2023-10-20
+create table comment(
+cno bigint auto_increment,
+bno bigint not null,
+writer varchar(100) not null,
+content text not null,
+reg_at datetime default now(),
+mod_at datetime default now(),
+primary key(cno));
+
+--2023-10-24
+create table file(
+uuid varchar(256) not null,
+save_dir varchar(256) not null,
+file_name varchar(256) not null,
+file_type tinyint(1) default 0,
+bno bigint,
+file_size bigint,
+reg_at datetime default now(),
+primary key(uuid));
+
+
+
+
+
+
+--231027----------------S
+create table member(
+email varchar(100) not null,
+pwd varchar(1000) not null,
+nick_name varchar(100) not null,
+reg_at datetime default now(),
+last_login datetime default null,
+primary key(email));
+
+create table auth_member(
+email varchar(100) not null,
+auth varchar(50) not null,
+);
+alter table auth_member drop primary key; //기본키 잘못 넣으면 기본키 삭제
+
+--alter table auth_member add constraint fk_ak_auth
+--foreign key(email) references member(email);
+
+--231027----------------E

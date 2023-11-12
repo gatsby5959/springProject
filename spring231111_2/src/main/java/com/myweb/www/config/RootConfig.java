@@ -71,16 +71,19 @@ public class RootConfig {
 	    // MariaDB 드라이버 클래스로 변경
 	    hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
 	    // MariaDB JDBC URL로 변경, 포트는 MariaDB 기본 포트인 3306 사용
-	    hikariConfig.setJdbcUrl("jdbc:mysql://aj2002.cafe24.com:3306/aj2002");
+//	    hikariConfig.setJdbcUrl("jdbc:mysql://aj2002.cafe24.com:3306/aj2002");
+	    
+	    
 //	    hikariConfig.setJdbcUrl("jdbc:mariadb://aj2002.cafe24.com:3306/aj2002");
 //	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/springdb");
-//	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/aj2002");
+//	    hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/aj2002");
+	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/aj2002");
 	    hikariConfig.setUsername("aj2002");
 	    hikariConfig.setPassword("k2m16ak47");
 	    hikariConfig.setMaximumPoolSize(5);
 	    hikariConfig.setMinimumIdle(5);
 
-	    hikariConfig.setConnectionTestQuery("SELECT 123412341234");
+	    hikariConfig.setConnectionTestQuery("SELECT 1");
 	    hikariConfig.setPoolName("springHikariCP");
 
 	    // 여기서부터는 기본적인 HikariCP의 설정으로 마리아DB에 맞게 필요한 부분을 변경하거나 추가할 수 있습니다.

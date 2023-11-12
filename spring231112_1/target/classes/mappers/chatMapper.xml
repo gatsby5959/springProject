@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.ChatDAO">
+	<insert id="submit">
+		insert into chat
+		values(NULL,#{fromID},#{toID},#{chatContent},NOW());
+	</insert>
+	<select id="selectAll" resultType="com.myweb.www.domain.ChatDTO">
+		select * from chat limit 800;
+	</select>
+</mapper>
